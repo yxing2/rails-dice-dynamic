@@ -3,7 +3,15 @@ class DiceController < ApplicationController
     render({ :template => "layouts/home" })
   end
 
-  def two_six
-    render({ :template => "layouts/two_six" })
+  def roll
+    @number = params.fetch("number").to_i
+    @sides = params.fetch("sides").to_i
+    @rolls = []
+
+    @number.times do
+      die = rand(1..@sides)
+      @rolls.push(die)
+    end
+      render({ :template => "layouts/result" })
   end
 end
